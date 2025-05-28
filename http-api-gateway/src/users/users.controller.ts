@@ -6,11 +6,10 @@ import { CreateUserDto } from './dtos/createUser.dto';
 export class UserController {
   constructor(
     @Inject('NATS_SERVICE') private readonly natsService: ClientProxy,
-  ) {} //
+  ) {}
 
   @Post()
   createUser(@Body() payload: CreateUserDto) {
-    console.warn('DEBUGPRINT[35]: users.controller.ts:12: payload=', payload);
-    this.natsService.send('createUser', payload);
+    return this.natsService.send({ cmd: 'createUser' }, payload);
   }
 }
