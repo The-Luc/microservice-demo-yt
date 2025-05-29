@@ -10,9 +10,9 @@ import { UserModule } from './users/users.module';
       type: 'mysql',
       host: process.env.DB_HOST || 'mysql_db',
       port: +(process.env.DB_PORT || 3306),
-      username: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || 'password',
-      database: process.env.DB_NAME || 'users_db',
+      username: process.env.DB_USER || 'app_user',
+      password: process.env.DB_PASSWORD || 'app_password',
+      database: process.env.DB_NAME || 'nestjs-microservice',
       entities: [__dirname + '/**/*.entity.{ts,js}'],
       synchronize: true, // turn off in production
     }),
