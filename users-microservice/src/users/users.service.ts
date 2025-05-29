@@ -9,29 +9,29 @@ import { UpdateUserDto } from './dtos/updateUser.dto';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly repo: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   create(dto: CreateUserDto) {
-    const user = this.repo.create(dto);
-    return this.repo.save(user);
+    const user = this.userRepository.create(dto);
+    return this.userRepository.save(user);
   }
 
   findAll() {
-    return this.repo.find();
+    return this.userRepository.find();
   }
 
   findOne(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.userRepository.findOneBy({ id });
   }
 
   async update(id: number, dto: UpdateUserDto) {
-    const user = await this.repo.preload({ id, ...dto });
+    const user = await this.userRepository.preload({ id, ...dto });
     if (!user) throw new NotFoundException(`User ${id} not found`);
-    return this.repo.save(user);
+    return this.userRepository.save(user);
   }
 
   remove(id: number) {
-    return this.repo.delete(id);
+    return this.userRepository.delete(id);
   }
 }
